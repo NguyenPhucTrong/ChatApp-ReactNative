@@ -19,6 +19,7 @@
     "@react-native-community/netinfo": "11.3.1",
     "@react-navigation/native": "^6.0.2",
     "@stream-io/flat-list-mvcp": "^0.10.3",
+    "dotenv": "^16.4.5",
     "expo": "~51.0.28",
     "expo-av": "^14.0.6",
     "expo-clipboard": "^6.0.3",
