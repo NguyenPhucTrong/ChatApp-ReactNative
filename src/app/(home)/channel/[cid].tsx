@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import { Channel as ChannelType, StreamChat } from 'stream-chat';
 import { Channel, MessageInput, MessageList, useChatContext } from 'stream-chat-expo';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function ChannelScreen() {
@@ -26,7 +27,9 @@ export default function ChannelScreen() {
     return (
         <Channel channel={channel}>
             <MessageList />
-            <MessageInput />
+            <SafeAreaView edges={["bottom"]} >
+                <MessageInput />
+            </SafeAreaView>
         </Channel>
     )
 }
