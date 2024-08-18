@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { StyleSheet, View, Alert } from 'react-native'
+import { StyleSheet, View, Alert, ScrollView } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 import { supabase } from '../../../lib/ supabase'
 import { useAuth } from '@/src/providers/AuthProvider'
+import Avatar from '@/src/components/Avatar'
 
 export default function ProflieScreen() {
     const { session } = useAuth();
@@ -87,7 +88,17 @@ export default function ProflieScreen() {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
+            <View style={{ alignItems: "center" }}>
+                <Avatar
+                    size={200}
+                    url={avatarUrl}
+                    onUpload={(url: string) => {
+                        setAvatarUrl(url)
+                        updateProfile({ username, website, avatar_url: url, full_name: fullName })
+                    }}
+                />
+            </View>
             <View style={[styles.verticallySpaced, styles.mt20]}>
                 <Input label="Email" value={session?.user?.email} disabled />
             </View>
@@ -109,10 +120,10 @@ export default function ProflieScreen() {
                 />
             </View>
 
-            <View style={styles.verticallySpaced}>
+            <View style={[styles.verticallySpaced, styles.mt10]}>
                 <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -129,4 +140,8 @@ const styles = StyleSheet.create({
     mt20: {
         marginTop: 20,
     },
+    mt10: {
+        marginBottom: 15,
+
+    }
 })
