@@ -9,7 +9,7 @@ export default function AuthLayout() {
     // console.log(user)
 
     if (user) {
-        return <Redirect href="/(home)/(tabs)/profile" />
+        return <Redirect href="/(home)/(tabs)" />
     }
 
     return (
