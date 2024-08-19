@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { ChannelList } from 'stream-chat-expo'
-import { router } from 'expo-router';
+import { Link, router, Stack } from 'expo-router';
 import { useAuth } from '@/src/providers/AuthProvider';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 export default function MainTabScreen() {
@@ -12,9 +13,22 @@ export default function MainTabScreen() {
         return null
     }
 
-    return <ChannelList
-        filters={{ members: { $in: [user.id] } }}
-        onSelect={(channel) => router.push(`/channel/${channel.cid}`)}
-    />
+    return (
+        <>
+            <Stack.Screen options={{
 
+                headerRight:
+                    () =>
+                        <Link href={"/(home)/users"} asChild>
+                            <FontAwesome5 name="users" size={22} color="gray" style={{ marginHorizontal: 15 }} />
+                        </Link >
+            }} />
+
+
+            < ChannelList
+                filters={{ members: { $in: [user.id] } }}
+                onSelect={(channel) => router.push(`/channel/${channel.cid}`)}
+            />
+        </>
+    )
 }
