@@ -16,11 +16,17 @@ export default function ChatProvider({ children }: PropsWithChildren) {
     const { profile } = useAuth();
 
     useEffect(() => {
+
         if (!profile) {
             return;
         }
 
         const connect = async () => {
+            if (client.user) {
+                await client.disconnectUser();
+            }
+
+
             await client.connectUser(
                 {
                     id: profile.id,
@@ -41,7 +47,7 @@ export default function ChatProvider({ children }: PropsWithChildren) {
             //     name: 'The Park',
             // });
             // await channel.create();
-        }
+        };
         connect();
 
         return () => {
@@ -52,6 +58,7 @@ export default function ChatProvider({ children }: PropsWithChildren) {
         }
 
     }, [profile?.id]);
+
 
     if (!isReady) {
         return <ActivityIndicator />
